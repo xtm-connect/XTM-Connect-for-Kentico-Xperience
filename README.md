@@ -14,7 +14,7 @@ Don't have your credentials yet?
 
 Sign up [here](https://xtm.cloud/trial/) for the free XTM Cloud free trial account.
 
-Contact [XTM Sales team](sales@xtm.cloud) to get access.
+Contact [XTM Sales team](mail:sales@xtm.cloud) to get access.
 
 ## NuGet package
 
