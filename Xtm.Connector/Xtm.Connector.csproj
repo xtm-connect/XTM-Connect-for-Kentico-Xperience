@@ -1,0 +1,665 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3C8859A1-0353-4CB0-B02A-078009DE9ACB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Xtm.Connector</RootNamespace>
+    <AssemblyName>Xtm.Connector</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CMS.DataEngine, Version=11.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\CMS.DataEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="CMS.EventLog">
+      <HintPath>..\Lib\CMS.EventLog.dll</HintPath>
+    </Reference>
+    <Reference Include="CMS.Helpers, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\CMS.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Config\Interfaces\IXtmConnectorConfiguration.cs" />
+    <Compile Include="Config\XtmConnectorConfiguration.cs" />
+    <Compile Include="Connected Services\XtmWebService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Exceptions\InvalidXtmConfigurationException.cs" />
+    <Compile Include="Exceptions\XtmConnectionException.cs" />
+    <Compile Include="Exceptions\XtmConnectorException.cs" />
+    <Compile Include="Factories\Interfaces\ISoapClientFactory.cs" />
+    <Compile Include="Factories\SoapClientFactory.cs" />
+    <Compile Include="Models\CallbackCollection.cs" />
+    <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\File.cs" />
+    <Compile Include="Models\Job.cs" />
+    <Compile Include="Models\Project.cs" />
+    <Compile Include="Models\Template.cs" />
+    <Compile Include="Services\Interface\IXtmConnector.cs" />
+    <Compile Include="Services\XtmConnector.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\CMSModules\CMSInstallation\Packages\XtmTranslations_1.0.0.xml" />
+    <Content Include="CMSModules\XtmConnect\Pages\XtmTranslationProvider\XtmTranslationProvider_Edit.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="CMSModules\XtmConnect\Pages\XtmTranslationProvider\XtmTranslationProvider_List.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="App_Data\CMSModules\XtmTranslations\Install\XtmTranslations_1.0.0.zip" />
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.assignLinguistToJobResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.assignLinguistToProjectResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.checkJobAnalysisCompletionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.checkJobCompletionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.checkJobFileCompletionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.checkProjectAnalysisCompletionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.checkProjectCompletionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.checkProjectFileCompletionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.checkTMCompletionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.checkUploadXliffCompletionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.checkUserLoginResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.copyCustomerResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.createCustomerPMResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.createCustomerResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.createProjectForPMMTOMResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.createProjectForPMURLResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.createProjectMTOMResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.createProjectURLResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.createTemplateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.createUserResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.downloadJobFileMTOMResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.downloadJobFileURLResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.downloadJobMTOMResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.downloadJobURLResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.downloadProjectFileMTOMResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.downloadProjectFileURLResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.downloadProjectMetricsMTOMResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.downloadProjectMetricsURLResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.downloadProjectMTOMResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.downloadProjectURLResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.downloadReferenceMaterialsMTOMResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.downloadReferenceMaterialsURLResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.downloadTMMTOMResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.downloadTMURLResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.exportTMResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.findAnalysisTemplatesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.findCustomerResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.findProjectResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.findTemplateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.findUserResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.findWorkflowResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.generateCostResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.generateJobFileResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.generateProjectFileResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.generateProjectsSimilarityResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.getEditorURLResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.getSupportedFilesInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.getXTMInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.importTMMTOMResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.importTMURLResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.moveJobWorkflowResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.moveProjectWorkflowResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.obtainCostResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.obtainCustomFieldsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.obtainJobExtraInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.obtainJobMetricsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.obtainLanguageCombinationsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.obtainPMConcordanceLinkResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.obtainPMProjectEditorLinkResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.obtainPMTemplateEditorLinkResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.obtainPMTranslationPropsLinkResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.obtainProjectAllStatisticsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.obtainProjectEstimatesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.obtainProjectExtraInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.obtainProjectMetricsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.obtainProjectsSimilarityResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.obtainProjectStatisticsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.obtainXTMEditorLinkResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.obtainXTMProjectManagerLinkResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.obtainXTMTermManagerLinkResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.obtainXTMTmManagerLinkResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.startProjectResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.updateCustomerActivityResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.updateCustomerResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.updateJobActivityResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.updateJobGroupWorkflowResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.updateJobStepPropertyResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.updateJobWorkflowActivityResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.updateProjectActivityResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.updateProjectEstimatesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.updateProjectResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.updateProjectStepPropertyResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.updateProjectWorkflowActivityResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.updateProjectWorkflowResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.updateReferenceFilesMTOMResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.updateReferenceFilesURLResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.updateTargetLanguagesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.updateTranslationFilesMTOMResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.updateTranslationFilesURLResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.updateUserActivityResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.updateUserResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.uploadProjectFileMTOMResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.uploadProjectFileURLResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.uploadXliffMTOMResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.uploadXliffURLResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmAnalysisTemplateAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmAssignLinguistToProjectResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmCheckProjectAnalysisCompletionResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmCheckProjectCompletionResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmCopyCustomerStatusAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmCostDescriptorAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmCostResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmCreateCustomerPMResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmCreateCustomerResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmCreateProjectForPMMTOMResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmCreateProjectForPMURLResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmCreateProjectMTOMResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmCreateProjectURLResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmCreateTemplateResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmCreateUserResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmCustomerActivityResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmCustomerDetailsResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmCustomFieldDetailsAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmDownloadProjectMetricsMTOMResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmDownloadProjectMetricsURLResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmDownloadProjectMTOMResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmDownloadProjectURLResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmFindProjectResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmGenerateProjectFileResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmGetEditorURLResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmGetSupportedFilesInfoResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmGetXTMInfoResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmJobExtraInfoResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmJobFileBaseResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmJobFileMTOMResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmJobFileStatusResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmJobFileURLResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmJobLinguistAssignmentResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmJobMetricsResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmJobStatusResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmJobWorkflowActivityResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmMoveJobWorkflowResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmMoveProjectWorkflowResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmObtainLanguageCombinationsResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmObtainPMConcordanceLinkResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmObtainPMProjectEditorLinkResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmObtainPMTemplateEditorLinkResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmObtainPMTranslationPropsLinkResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmObtainProjectAllStatisticsResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmObtainProjectEstimatesResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmObtainProjectExtraInfoResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmObtainXTMEditorLinkResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmObtainXTMTermManagerLinkResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmObtainXTMTmManagerLinkResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmProjectActivityResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmProjectFileMTOMAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmProjectFileStatusResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmProjectFileURLAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmProjectManagerLinkResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmProjectMetricsResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmProjectsSimilarityDescriptorAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmProjectsSimilarityResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmProjectStartResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmProjectStatisticsResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmProjectUpdateResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmProjectWorkflowActivityResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmReferenceMaterialsMTOMResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmReferenceMaterialsURLResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmTemplateDetailsResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmtmFileDescriptorAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmtmmtomResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmtmStatusResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmtmurlResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmUpdateCustomerStatusAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmUpdateJobActivityResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmUpdateJobGroupWorkflowResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmUpdateJobStepPropertyResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmUpdateProjectEstimatesResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmUpdateProjectStepPropertyResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmUpdateProjectWorkflowResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmUpdateReferenceFilesMTOMResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmUpdateReferenceFilesURLResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmUpdateTargetLanguagesResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmUpdateTranslationFilesMTOMResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmUpdateTranslationFilesURLResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmUpdateUserStatusAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmUploadProjectFileMTOMResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmUploadProjectFileURLResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmUploadXliffStatusResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmUserActivityResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmUserDetailsResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmUserLoginResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmWorkflowDescriptorAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\Xtm.Connector.XtmWebService.xtmXliffFileResponseAPI.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\XtmWebService\XTMWebService1.wsdl">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\XtmWebService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\XtmWebService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\XtmWebService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\XtmWebService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
