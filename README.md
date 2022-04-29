@@ -4,6 +4,18 @@ This repository contains the source code of the XTM Connect - Kentico Xperience.
 
 Version supported: v13
 
+## Basic Requirements
+
+An XTM account with API access enabled.
+
+XTM login details provided either by your company administrator or by XTM International Ltd.
+
+Don't have your credentials yet?
+
+Sign up [here](https://xtm.cloud/trial/) for the free XTM Cloud free trial account.
+
+Contact [XTM Sales team](sales@xtm.cloud) to get access.
+
 ## NuGet package
 
 You can download XTM Connect - Kentico Xperience here:
