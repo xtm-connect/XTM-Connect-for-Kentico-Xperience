@@ -20,7 +20,7 @@ Contact XTM Sales team (sales@xtm.cloud) to get access.
 
 You can download XTM Connect - Kentico Xperience here:
 
-[Xtm-Connect 3.1.0](https://linktodocumentation)
+[Xtm-Connect 3.1.0](https://github.com/xtm-connect/XTM-Connect-for-Kentico-Xperience/releases/download/3.1.0/XtmConnect.3.1.0.nupkg)
 ## Documentation
 
 You can access XTM Connect - Kentico Xperience documentation here:
