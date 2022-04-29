@@ -24,10 +24,10 @@ Feel free to submit pull requst.
 
 How to get started:
 
-        1. Download Kentico-Connect nuget package and code from github repository.
-        2. Add NuGet package to your project.
-        3. Copy downloaded folders into your kentico instance folders.
-        4. Add Xtm-Connector project to your solution (path: Xtm.Connector//Xtm.Connector.csproj)
-        5. Add Xtm-Connect project to your solution (path: CMS//Xtm.Connect.csproj)
-        5. Clear references to Xtm.Connect and Xtm.Connector from CMSApp.
-        6. Add references to Xtm.Connect project and Xtm.Connector project to CMSApp.
+    1. Download Kentico-Connect nuget package and code from github repository.
+    2. Add NuGet package to your project.
+    3. Copy downloaded folders into your kentico instance folders.
+    4. Add Xtm-Connector project to your solution (path: Xtm.Connector//Xtm.Connector.csproj)
+    5. Add Xtm-Connect project to your solution (path: CMS//Xtm.Connect.csproj)
+    6. Clear references to Xtm.Connect and Xtm.Connector from CMSApp.
+    7. Add references to Xtm.Connect project and Xtm.Connector project to CMSApp.
