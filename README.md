@@ -41,3 +41,7 @@ How to get started:
     5. Add XTM-Connect project to your solution (path: CMS//Xtm.Connect.csproj)
     6. Clear references to Xtm.Connect and Xtm.Connector from CMSApp.
     7. Add references to Xtm.Connect project and Xtm.Connector project to CMSApp.
+
+## Feedback
+
+If you find a bug or have any question, please feel free to reach us out at connectors@xtm-intl.com
