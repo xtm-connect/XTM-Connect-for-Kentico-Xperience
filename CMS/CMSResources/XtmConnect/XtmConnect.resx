@@ -193,7 +193,7 @@
     <value>Successfully deleted provider: {0}</value>
   </data>
   <data name="SuccesfullyAction" xml:space="preserve">
-    <value>Succesfully {} Xtm translation provider: </value>
+    <value>Succesfully {0} Xtm translation provider: </value>
   </data>
   <data name="TemplateDoesNotExists" xml:space="preserve">
     <value>Previously saved template does not exist in XTM system! (Template: {0})</value>
