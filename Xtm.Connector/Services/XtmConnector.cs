@@ -259,7 +259,7 @@ namespace Xtm.Connector.Logic.Services
                 var checkProjectCompletionResult = webService.checkProjectCompletion(loginApi, projectDescriptor, new xtmCheckProjectCompletionOptionsAPI());
                 var jobs = checkProjectCompletionResult
                     .project
-                    .jobs.Where(x => x.status == xtmJOBCOMPLETIONSTATUS.FINISHED)
+                    .jobs.Where(x => x.status == xtmJOBCOMPLETIONSTATUS.FINISHED && x.jobDescriptor.integrationId != null)
                     .Select(x => new Job { Id = x.jobDescriptor.idSpecified ? (long?)x.jobDescriptor.id : null, IntegrationId = x.jobDescriptor.integrationId })
                     .ToList();
 

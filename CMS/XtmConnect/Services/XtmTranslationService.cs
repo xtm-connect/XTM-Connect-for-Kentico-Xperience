@@ -319,10 +319,14 @@ namespace XtmConnect.Services
                         foreach (var file in targetFilesZIPs)
                         {
                             LogExtension.SafelyLogToKentico(EventType.INFORMATION, EVENT_SOURCE, $"DCT(s,x){submission.SubmissionID}-TrImTy-ChPrCo-FINISHED.ImportXLIFFfromZIP for {file.Name}.");
-                            string err = TranslationServiceHelper.ImportXLIFFfromZIP(submission, new MemoryStream(file.Data));
-                            if (err != null)
+                            string importXliffErrorText = TranslationServiceHelper.ImportXLIFFfromZIP(submission, new MemoryStream(file.Data));
+                            if (importXliffErrorText != null)
                             {
-                                throw new XtmModuleException($"XLIFF import exception message: {err}");
+                                if (!importXliffErrorText.StartsWith("Invalid XLIFF files"))
+                                {
+                                    throw new XtmModuleException("XLIFF import project exception message: " + importXliffErrorText);
+                                }
+                                LogExtension.SafelyLogToKentico(EventType.INFORMATION, EVENT_SOURCE, $"DCT(s,x){submission.SubmissionID}-TrImTy-ChPrCo-ImportXLIFFfromZIP for {file.Name} err {importXliffErrorText} - skipping this file.");
                             }
                         }
 
@@ -370,10 +374,14 @@ namespace XtmConnect.Services
                             try
                             {
                                 LogExtension.SafelyLogToKentico(EventType.INFORMATION, EVENT_SOURCE, $"DCT(s,x){submission.SubmissionID}-TrImTy-CheckJobCompletion. Calling ImportXLIFFfromZIP for {file.Name}.");
-                                string err = TranslationServiceHelper.ImportXLIFFfromZIP(submission, new MemoryStream(file.Data));
-                                if (err != null)
+                                string importXliffErrorText = TranslationServiceHelper.ImportXLIFFfromZIP(submission, new MemoryStream(file.Data));                               
+                                if (importXliffErrorText != null)
                                 {
-                                    throw new XtmModuleException($"XLIFF import exception message: {err}");
+                                    if (!importXliffErrorText.StartsWith("Invalid XLIFF files"))
+                                    {
+                                        throw new XtmModuleException("XLIFF import job exception message: " + importXliffErrorText);
+                                    }
+                                    LogExtension.SafelyLogToKentico(EventType.INFORMATION, EVENT_SOURCE, $"DCT(s,x){submission.SubmissionID}-TrImTy-CheckJobCompletion-ImportXLIFFfromZIP for {file.Name} err {importXliffErrorText} - skipping this file.");
                                 }
                             }
                             catch (Exception ex)
